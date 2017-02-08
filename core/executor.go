@@ -13,9 +13,7 @@ func (asyncExec AsyncExecutor) Run() {
 	n := len(asyncExec)
 	ch := make(chan *string, n)
 	for i := 0; i < n; i++ {
-		worker := Worker{
-			Command: asyncExec[i],
-			Output:  ch}
+		worker := NewWorker(asyncExec[i], ch)
 		go worker.Run()
 	}
 
