@@ -46,7 +46,7 @@ func getProjectFilePath(name string) string {
 	projectsFolder := user.HomeDir + "/" + shelfDir
 	if _, err := os.Stat(projectsFolder); os.IsNotExist(err) {
 		err := os.Mkdir(projectsFolder, 0700)
-		errorout.ErrQuit(err, "Could not create Project bot directory")
+		errorout.ErrQuit(err, "Could not create Shelf directory")
 	}
 	return projectsFolder + "/" + name + ".json"
 }
