@@ -1,3 +1,4 @@
+![Screenshot](resources/shelf_icon.png)
 # Shelf
 Shelf is a small CLI application that automates those tasks every developer does at the start of the day.
 ## It supports:
