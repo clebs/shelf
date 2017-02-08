@@ -23,7 +23,7 @@ func main() {
 			add()
 		case "pick":
 			if len(args) < 2 {
-				println("Wrong usage, project name required.")
+				help("pick")
 				os.Exit(2)
 			}
 			pick(args[1])
@@ -102,6 +102,7 @@ func help(args ...string) {
 		println("    Server location:   path to the folder where the local server is")
 		println("    Server command:    command to run inside the server folder, accepts args (e.g. mvn clean install)")
 	case "pick":
-		println("Pick help comming soon")
+		println("pick     load a project previously added with the add command.")
+		println("usage:   shelf pick [project name]")
 	}
 }
