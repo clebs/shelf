@@ -39,6 +39,13 @@ func Load(name string) project.Project {
 	return p
 }
 
+//Delete removes a project setup file form the system
+func Delete(name string) {
+	file := getProjectFilePath(name)
+	err := os.Remove(file)
+	errorout.ErrQuit(err, "Could not delete project")
+}
+
 func getProjectFilePath(name string) string {
 	user, err := user.Current()
 	errorout.ErrQuit(err, "Could not obtain user home directory.")

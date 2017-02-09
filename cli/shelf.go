@@ -27,6 +27,12 @@ func main() {
 				os.Exit(2)
 			}
 			pick(args[1])
+		case "delete":
+			if len(args) < 2 {
+				help("delete")
+				os.Exit(2)
+			}
+			delete(args[1])
 		case "help":
 			if len(args) > 1 {
 				help(args[1])
@@ -73,12 +79,8 @@ func pick(name string) {
 	syncExecutor.Run()
 }
 
-var scanner = bufio.NewScanner(os.Stdin)
-
-func ask(question string) (answer string) {
-	println(question)
-	scanner.Scan()
-	return scanner.Text()
+func delete(name string) {
+	filesystem.Delete(name)
 }
 
 func help(args ...string) {
@@ -89,6 +91,7 @@ func help(args ...string) {
 		println("The commands are:")
 		println("    add     add a new project")
 		println("    pick    picks up a project from the shelf")
+		println("    delete  removes a project from the shelf")
 		return
 	}
 
@@ -104,5 +107,16 @@ func help(args ...string) {
 	case "pick":
 		println("pick     load a project previously added with the add command.")
 		println("usage:   shelf pick [project name]")
+	case "delete":
+		println("delete   remove a project from the shelf.")
+		println("usage:   shelf delete [project name]")
 	}
+}
+
+var scanner = bufio.NewScanner(os.Stdin)
+
+func ask(question string) (answer string) {
+	println(question)
+	scanner.Scan()
+	return scanner.Text()
 }
