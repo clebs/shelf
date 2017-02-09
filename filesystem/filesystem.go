@@ -44,6 +44,7 @@ func Delete(name string) {
 	file := getProjectFilePath(name)
 	err := os.Remove(file)
 	errorout.ErrQuit(err, "Could not delete project")
+	fmt.Printf("The project %s has been removed from the shelf.", name)
 }
 
 func getProjectFilePath(name string) string {
