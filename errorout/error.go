@@ -16,7 +16,7 @@ func Panic(err error, message string) {
 //ErrQuit checks if there is an error, if there is it prints it out and exits the program
 func ErrQuit(err error, message string) {
 	if err != nil {
-		fmt.Printf("Error: %s (%v)", message, err)
+		fmt.Printf("Error: %s (%v)\n", message, err)
 		os.Exit(2)
 	}
 }
