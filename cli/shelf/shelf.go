@@ -1,4 +1,4 @@
-//shelf is a nice servant that helps launching your favorite projects!
+//shelf is a nice servant that helps launching your favorite projects!!
 package main
 
 import (
