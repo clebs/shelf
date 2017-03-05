@@ -7,7 +7,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/clebs/shelf/core"
+	"github.com/clebs/gobatch"
+	"github.com/clebs/shelf/commands"
 	"github.com/clebs/shelf/filesystem"
 	"github.com/clebs/shelf/project"
 )
@@ -67,16 +68,17 @@ func pick(name string) {
 
 	println("Loading project:")
 	fmt.Println(p)
-	var asyncExecutor core.AsyncExecutor
 
-	asyncExecutor = append(asyncExecutor, core.StartIDECmd(p.IDE))
-	asyncExecutor = append(asyncExecutor, core.UpdateRepositoriesCmd(p.Repos...)...)
-	asyncExecutor = append(asyncExecutor, core.StartServer(p.Server))
-	asyncExecutor.Run()
+	var serverBoot gobatch.SyncRunner
+	serverBoot.Add(commands.UpdateRepositoriesCmds(p.Server.Path)...)
+	serverBoot.Add(commands.StartServer(p.Server))
 
-	var syncExecutor core.SyncExecutor
-	syncExecutor = append(syncExecutor, core.UpdateRepositoriesCmd(p.Server.Path)...)
-	syncExecutor.Run()
+	var projectBoot gobatch.AsyncRunner
+	projectBoot.Add(commands.StartIDECmd(p.IDE))
+	projectBoot.Add(commands.UpdateRepositoriesCmds(p.Repos...)...)
+	projectBoot.Add(serverBoot)
+	projectBoot.Run()
+	fmt.Printf("\nProject %s loaded.\n", name)
 }
 
 func delete(name string) {
