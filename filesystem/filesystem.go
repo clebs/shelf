@@ -18,13 +18,13 @@ func Save(p project.Project, pID string) {
 	data, err := json.MarshalIndent(p, "", "    ")
 	errorout.ErrQuit(err, "Could not serialize project.")
 
-	err = ioutil.WriteFile(getProjectFilePath(pID), data, 0644)
+	err = ioutil.WriteFile(projectFilePath(pID), data, 0644)
 	errorout.ErrQuit(err, "Could not add Project to the shelf")
 }
 
 //Load locates a project on the filesystem by its name and loads its data
 func Load(name string) project.Project {
-	filePath := getProjectFilePath(name)
+	filePath := projectFilePath(name)
 
 	if _, err := os.Stat(filePath); os.IsNotExist(err) {
 		errorout.ErrQuit(err, fmt.Sprintf("The project %s could not be found.", name))
@@ -41,13 +41,13 @@ func Load(name string) project.Project {
 
 //Delete removes a project setup file form the system
 func Delete(name string) {
-	file := getProjectFilePath(name)
+	file := projectFilePath(name)
 	err := os.Remove(file)
 	errorout.ErrQuit(err, "Could not delete project")
 	fmt.Printf("The project %s has been removed from the shelf.\n", name)
 }
 
-func getProjectFilePath(name string) string {
+func projectFilePath(name string) string {
 	user, err := user.Current()
 	errorout.ErrQuit(err, "Could not obtain user home directory.")
 

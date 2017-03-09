@@ -9,14 +9,14 @@ import (
 	"github.com/clebs/shelf/project"
 )
 
-// StartIDECmd starts the given IDE by running its IDE.Exec and opens the workspace IDE.Workspace
-func StartIDECmd(ide project.IDE) gobatch.Runner {
+// StartIDE starts the given IDE by running its IDE.Exec and opens the workspace IDE.Workspace
+func StartIDE(ide project.IDE) gobatch.Runner {
 	return &gobatch.CommandRunner{Command: exec.Command("open", ide.Exec), Output: os.Stdout}
 
 }
 
-// UpdateRepositoriesCmds updates all repositories in the project with git pull
-func UpdateRepositoriesCmds(repos ...string) []gobatch.Runner {
+// UpdateRepositories updates all repositories in the project with git pull
+func UpdateRepositories(repos ...string) []gobatch.Runner {
 	var cmdRunners []gobatch.Runner
 	for _, repo := range repos {
 		cmd := exec.Command("git", "pull")

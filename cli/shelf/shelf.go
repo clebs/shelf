@@ -70,12 +70,12 @@ func pick(name string) {
 	fmt.Println(p)
 
 	var serverBoot gobatch.SyncRunner
-	serverBoot.Add(commands.UpdateRepositoriesCmds(p.Server.Path)...)
+	serverBoot.Add(commands.UpdateRepositories(p.Server.Path)...)
 	serverBoot.Add(commands.StartServer(p.Server))
 
 	var projectBoot gobatch.AsyncRunner
-	projectBoot.Add(commands.StartIDECmd(p.IDE))
-	projectBoot.Add(commands.UpdateRepositoriesCmds(p.Repos...)...)
+	projectBoot.Add(commands.StartIDE(p.IDE))
+	projectBoot.Add(commands.UpdateRepositories(p.Repos...)...)
 	projectBoot.Add(serverBoot)
 	projectBoot.Run()
 	fmt.Printf("\nProject %s loaded.\n", name)
