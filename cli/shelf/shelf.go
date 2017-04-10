@@ -35,11 +35,13 @@ func main() {
 			}
 			delete(args[1])
 		case "help":
-			if len(args) > 1 {
-				help(args[1])
-			} else {
+			if len(args) < 2 {
 				help()
+			} else {
+				help(args[1])
 			}
+		default:
+			help(args[0])
 		}
 	}
 }
@@ -112,6 +114,8 @@ func help(args ...string) {
 	case "delete":
 		println("delete   remove a project from the shelf.")
 		println("usage:   shelf delete [project name]")
+	default:
+		println("Invalid arguments. Please run \"shelf help [command]\" to see a list of available agruments.")
 	}
 }
 
