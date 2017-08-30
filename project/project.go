@@ -11,6 +11,7 @@ type Project struct {
 	Server Server
 }
 
+// IDE represents the information necessary to open an IDE.
 type IDE struct {
 	Exec      string
 	Workspace string

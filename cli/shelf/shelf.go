@@ -115,7 +115,7 @@ func help(args ...string) {
 		println("delete   remove a project from the shelf.")
 		println("usage:   shelf delete [project name]")
 	default:
-		println("Invalid arguments. Please run \"shelf help [command]\" to see a list of available agruments.")
+		println("Invalid arguments. Please run \"shelf help [command]\" to see a list of available arguments.")
 	}
 }
 
